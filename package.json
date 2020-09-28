@@ -1,0 +1,11 @@
+{
+  "name": "kju-client",
+  "version": "0.0.1",
+  "description": "A JavaScript client for kju",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Marco Boelling",
+  "license": "MIT"
+}

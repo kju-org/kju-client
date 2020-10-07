@@ -12,7 +12,7 @@ For details about KJU, visit the [KJU Website](https://kju-org.github.io).
 > npm
 
 ```shell
-npm i kju-sdk
+npm i kju-client
 ```
 
 > Browser

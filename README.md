@@ -53,3 +53,12 @@ kju.redeemResonse({
 
 The kju JS client has the folllowing functions:
 
+## createToken
+
+Creates a creationToken
+
+```javascript
+kju.createToken(token => {
+	console.log(token) // sdn23nf29q...
+})
+```

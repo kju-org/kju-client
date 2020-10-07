@@ -6,81 +6,88 @@ if (_nodejs) {
     };
 }
 
-if (_nodejs) {
-    const fetch = require('node-fetch');
-}
+if (_nodejs)
+    fetch = require('node-fetch');
+
 
 const kju = function() {
 
-    this.KJU_URL = "";
+    this.logsEnabled = true;
+
+    this.KJU_URL = "http://europe-west3-spoocloud-202009.cloudfunctions.net/kju-dummy/api";
 
     this.KJU_CREATION_TOKEN = null;
-    //this.KJU_CONSUMER_TOKEN = null;
+    //this.KJU_LAST_CONSUMER_TOKEN = null;
 
-    this.createToken = () => {
+    this.createToken = (cb) => {
 
-        fetch(this.KJU_URL + '/creationToken' {
+        fetch(this.KJU_URL + '/creationToken', {
                 method: 'post',
                 headers: { 'Content-Type': 'application/json' },
             })
             .then(res => res.json())
             .then(json => {
                 this.creationToken = json.data;
-                console.log('token saved:', json);
+                if (cb) cb(this.creationToken);
+                if (this.logsEnabled) console.log('token saved:', json);
             });
     }
 
-    this.createMessage = (msg, creationToken) => {
+    this.createMessage = (data, cb) => {
 
-        fetch(this.KJU_URL + '/message?token=' + creationToken || KJU_CREATION_TOKEN, {
+        fetch(this.KJU_URL + '/message?token=' + data.token || KJU_CREATION_TOKEN, {
                 method: 'post',
-                body: msg,
+                body: JSON.stringify(data.msg),
                 headers: { 'Content-Type': 'application/json' },
             })
             .then(res => res.json())
             .then(json => {
-                console.log('message created', json)
+                if (cb) cb(json);
+                if (this.logsEnabled) console.log('message created', json)
             });
 
     }
 
-    this.getMessage = (msgId, token) => {
+    this.getMessage = (data, cb) => {
 
-        fetch(this.KJU_URL + '/message/' + msgId + '?token=' + token, {
+        fetch(this.KJU_URL + '/message/' + data.msgId + '?token=' + data.token, {
                 method: 'get',
                 headers: { 'Content-Type': 'application/json' },
             })
             .then(res => res.json())
             .then(json => {
-                console.log('message:', json)
+                if (cb) cb(json);
+                if (this.logsEnabled) console.log('message:', json)
             });
     }
 
-    this.getMessages = (token) => {
+    this.getMessages = (data, cb) => {
 
-        fetch(this.KJU_URL + '/messages?token=' + token, {
+        fetch(this.KJU_URL + '/messages?token=' + data.token, {
                 method: 'get',
                 headers: { 'Content-Type': 'application/json' },
             })
             .then(res => res.json())
             .then(json => {
-                console.log('messages:', json)
+                if (cb) cb(json);
+                if (this.logsEnabled) console.log('messages:', json)
             });
     }
 
-    this.redeemResponse = (msgId, respId, token) => {
+    this.redeemResponse = (data, cb) => {
 
-        fetch(this.KJU_URL + '/message/' + msgId + '/response/' + respId + '?token=' + token, {
+        fetch(this.KJU_URL + '/message/' + data.msgId + '/response/' + data.respId + '?token=' + data.token, {
                 method: 'get',
                 headers: { 'Content-Type': 'application/json' },
             })
             .then(res => res.json())
             .then(json => {
-                console.log('redeemed:', json)
+                if (cb) cb(json);
+                if (this.logsEnabled) console.log('redeemed:', json)
             });
     }
 
-    this.redeemResponseLink = (link) => {
+    this.redeemResponseByLink = (link, cb) => {
 
         fetch(link, {
                 method: 'get',
@@ -88,11 +95,12 @@ const kju = function() {
             })
             .then(res => res.json())
             .then(json => {
-                console.log('redeemed:', json)
+                if (cb) cb(json);
+                if (this.logsEnabled) console.log('redeemed:', json)
             });
     }
 }
 
-if (_nodejs) {
-    module.exports.kju = kju;
-} else window.kju = kju;
+if (_nodejs)
+    module.exports = kju;
+else window.kju = kju;

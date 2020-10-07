@@ -18,13 +18,14 @@ npm i kju-sdk
 > Browser
 
 ```html
-<script src="https://cdn.jsdelivr.net/gh/kju-org/kju-client/index.js">
+<script src="https://cdn.jsdelivr.net/gh/kju-org/kju-client/index.js"></script>
 ```
 
 # Example
 
 ```javascript
-kju = new kju();
+// Initialize
+kju = new KJU();
 
 // Create a token
 kju.createToken(token => {

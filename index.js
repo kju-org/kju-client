@@ -10,7 +10,7 @@ if (_nodejs)
     fetch = require('node-fetch');
 
 
-const kju = function() {
+const KJU = function() {
 
     this.logsEnabled = true;
 
@@ -102,5 +102,5 @@ const kju = function() {
 }
 
 if (_nodejs)
-    module.exports = kju;
-else window.kju = kju;
+    module.exports = KJU;
+else window.KJU = KJU;

@@ -4,6 +4,9 @@ This is the official JavaScript Client for KJU.
 
 Runs on ***Node.js*** and in the ***Browser***
 
+For details about KJU, visit the [KJU Website](https://kju-org.github.io).
+
+
 # Install
 
 > npm

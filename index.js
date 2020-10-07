@@ -61,6 +61,19 @@ const KJU = function() {
             });
     }
 
+    this.deleteMessage = (data, cb) => {
+
+        fetch(this.KJU_URL + '/message/' + data.msgId + '?token=' + data.token, {
+                method: 'delete',
+                headers: { 'Content-Type': 'application/json' },
+            })
+            .then(res => res.json())
+            .then(json => {
+                if (cb) cb(json);
+                if (this.logsEnabled) console.log('message:', json)
+            });
+    }
+
     this.getMessages = (data, cb) => {
 
         fetch(this.KJU_URL + '/messages?token=' + data.token, {

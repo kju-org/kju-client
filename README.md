@@ -97,6 +97,19 @@ kju.getMessage({
 })
 ```
 
+## deleteMessage
+
+Delete a single message by id
+
+```javascript
+kju.deleteMessage({
+	msgId: "The message Id"
+	token: "The consumer token"
+}, data => {
+	console.log(data) // returns a success message
+})
+```
+
 ## getMessages
 
 Returns multiple messages that have the message Tag embedded in the consumer token

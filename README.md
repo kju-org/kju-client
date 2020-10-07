@@ -18,7 +18,7 @@ npm i kju-sdk
 > Browser
 
 ```html
-<script src="https://cdn.jsdelivr.net/gh/kju-org/kju-client/index.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/kju-org/kju-client@latest/index.js"></script>
 ```
 
 # Example

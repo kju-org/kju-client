@@ -104,7 +104,7 @@ Delete a single message by id
 ```javascript
 kju.deleteMessage({
 	msgId: "The message Id"
-	token: "The consumer token"
+	token: "The creationToken that the message was created with"
 }, data => {
 	console.log(data) // returns a success message
 })

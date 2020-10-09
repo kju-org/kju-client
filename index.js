@@ -19,7 +19,7 @@ const KJU = function() {
     this.KJU_CREATION_TOKEN = null;
     //this.KJU_LAST_CONSUMER_TOKEN = null;
 
-    this.createToken = (data, cb) => {
+    this.personalToken = (data, cb) => {
 
         fetch(this.KJU_URL + '/personalToken', {
                 method: 'post',

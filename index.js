@@ -19,16 +19,17 @@ const KJU = function() {
     this.KJU_CREATION_TOKEN = null;
     //this.KJU_LAST_CONSUMER_TOKEN = null;
 
-    this.createToken = (cb) => {
+    this.createToken = (data, cb) => {
 
-        fetch(this.KJU_URL + '/creationToken', {
+        fetch(this.KJU_URL + '/personalToken', {
                 method: 'post',
+                body: JSON.stringify(data),
                 headers: { 'Content-Type': 'application/json' },
             })
             .then(res => res.json())
             .then(json => {
-                this.creationToken = json.data;
-                if (cb) cb(this.creationToken);
+                this.personalToken = json.data;
+                if (cb) cb(this.personalToken);
                 if (this.logsEnabled) console.log('token saved:', json);
             });
     }

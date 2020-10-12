@@ -18,7 +18,7 @@ npm i kju-client
 > Browser
 
 ```html
-<script src="https://cdn.jsdelivr.net/gh/kju-org/kju-client@latest/index.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/kju-org/kju-client/index.js"></script>
 ```
 
 # Example
@@ -28,7 +28,9 @@ npm i kju-client
 kju = new KJU();
 
 // Create a token
-kju.createToken(token => {
+kju.personalToken({
+		contact: "email"
+	},token => {
 	console.log(token) // sdn23nf29q...
 })
 
@@ -57,12 +59,14 @@ kju.redeemResonse({
 
 The kju JS client has the folllowing functions:
 
-## createToken
+## personalToken
 
-Creates a creationToken
+Creates a personalToken
 
 ```javascript
-kju.createToken(token => {
+kju.personalToken({
+		contact: "email",
+	}, token => {
 	console.log(token) // sdn23nf29q...
 })
 ```

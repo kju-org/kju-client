@@ -77,7 +77,7 @@ const KJU = function() {
 
     this.getMessages = (data, cb) => {
 
-        fetch(this.KJU_URL + '/messages?token=' + data.token, {
+        fetch(this.KJU_URL + '/messages/'+data.type+'?token=' + data.token, {
                 method: 'get',
                 headers: { 'Content-Type': 'application/json' },
             })

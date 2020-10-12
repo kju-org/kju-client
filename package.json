@@ -1,6 +1,6 @@
 {
   "name": "kju-client",
-  "version": "0.0.1",
+  "version": "0.0.11",
   "description": "A JavaScript client for kju",
   "main": "index.js",
   "scripts": {

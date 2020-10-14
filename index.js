@@ -14,10 +14,42 @@ const KJU = function() {
 
     this.logsEnabled = true;
 
-    this.KJU_URL = "http://europe-west3-spoocloud-202009.cloudfunctions.net/kju-dummy/api";
+    this.KJU_URL = "http://localhost/api";//"https://europe-west3-spoocloud-202009.cloudfunctions.net/kju-dummy/api";
 
     this.KJU_CREATION_TOKEN = null;
     //this.KJU_LAST_CONSUMER_TOKEN = null;
+
+    this.listenHttp = (data) => {
+
+        if(!_nodejs) throw new Error('Feature lot available in this environment')
+
+        const app = require('express')();
+        const bodyParser = require('body-parser');
+      
+        const port = data.port || 3000
+
+        app.post((data.route || '/'), bodyParser.json(), (req, res) => {
+
+            console.log('body', req.body)
+
+            if (!data.handler) {
+                return res.status(400).json({ err: 'no handler provided' });
+            }           
+
+            data.handler(req.body, (responseId) => {
+                res.json({ msg: 'ok', returnUrl: this.KJU_URL + '/message/' + req.body._id + '/response/' + responseId + '?token=' + req.body.consumerToken })
+            }, err => {
+                res.status(400).json({ err: err })
+            });
+
+        })
+
+        app.listen(port, () => {
+            console.log(`KJU listener on port ${port}`)
+        })
+
+    }
+
 
     this.personalToken = (data, cb) => {
 
@@ -77,7 +109,7 @@ const KJU = function() {
 
     this.getMessages = (data, cb) => {
 
-        fetch(this.KJU_URL + '/messages/'+data.type+'?token=' + data.token, {
+        fetch(this.KJU_URL + '/messages/' + data.type + '?token=' + data.token, {
                 method: 'get',
                 headers: { 'Content-Type': 'application/json' },
             })

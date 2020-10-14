@@ -55,7 +55,7 @@ kju.redeemResonse({
 })
 ```
 
-# API
+# Client API
 
 The kju JS client has the folllowing functions:
 
@@ -147,5 +147,34 @@ Redeems a response using the complete link
 ```javascript
 kju.redeemResponseByLink("https://whater...", data => {
 	console.log(data) // returns a success message
+})
+```
+
+# Listener API
+
+> This Part of the API is for ***automated*** message processing. You can use this API to listen to messages and programatically redeem responses.
+
+## listenHttp
+
+Creates an express server and listens for messages on a specified http endpoint. When this endpoint is set as reciever in a message, the message will be transmitted to the listener for further processing.
+
+Message example
+```
+{
+	content: "blablalba",
+	reciever: "http://myendpoint.com"
+}
+```
+
+Example Listener
+```javascript
+kju.listenHttp({
+	route: '/', // path to listen on. "/"" is default
+	port: 3000, // port to listen on. 3000 is default
+	handler: ((msg, success, err) => {
+		// msg is the message
+		// success must be called with the responseId that should be auto-redeemed. Like: success("yes");
+		// err should be called when something goes wrong on your side
+	})
 })
 ```

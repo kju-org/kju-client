@@ -150,7 +150,7 @@ kju.redeemResponseByLink("https://whater...", data => {
 })
 ```
 
-# Listener API
+# Processing API
 
 > This Part of the API is for ***automated*** message processing. You can use this API to listen to messages and programatically redeem responses.
 

@@ -14,7 +14,7 @@ const KJU = function() {
 
     this.logsEnabled = true;
 
-    this.KJU_URL = "http://localhost/api";//"https://europe-west3-spoocloud-202009.cloudfunctions.net/kju-dummy/api";
+    this.KJU_URL = "https://europe-west3-spoocloud-202009.cloudfunctions.net/kju-dummy/api";
 
     this.KJU_CREATION_TOKEN = null;
     //this.KJU_LAST_CONSUMER_TOKEN = null;

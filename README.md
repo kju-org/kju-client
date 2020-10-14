@@ -4,8 +4,13 @@ This is the official JavaScript Client for KJU.
 
 Runs on ***Node.js*** and in the ***Browser***
 
-For details about KJU, visit the [KJU Website](https://kju-org.github.io).
+This SDK comes with two APIs:
 
+* A ***Client API***, that implements all message oparations
+* A ***Processing API***, that is for automated message processing
+
+
+For details about KJU, visit the [KJU Website](https://kju-org.github.io).
 
 # Install
 

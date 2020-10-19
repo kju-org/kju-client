@@ -91,6 +91,19 @@ kju.createMessage({
 })
 ```
 
+## permitCorrespondence
+
+Permits a given sender to send further messages
+
+```javascript
+kju.createMessage({
+	contact: "email of sender",
+	token: "The creationToken"
+}, data => {
+	console.log(data) // returns ok
+})
+```
+
 ## getMessage
 
 Returns a single message by id

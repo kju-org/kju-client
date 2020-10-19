@@ -21,11 +21,11 @@ const KJU = function() {
 
     this.listenHttp = (data) => {
 
-        if(!_nodejs) throw new Error('Feature lot available in this environment')
+        if (!_nodejs) throw new Error('Feature lot available in this environment')
 
         const app = require('express')();
         const bodyParser = require('body-parser');
-      
+
         const port = data.port || 3000
 
         app.post((data.route || '/'), bodyParser.json(), (req, res) => {
@@ -34,7 +34,7 @@ const KJU = function() {
 
             if (!data.handler) {
                 return res.status(400).json({ err: 'no handler provided' });
-            }           
+            }
 
             data.handler(req.body, (responseId) => {
                 res.json({ msg: 'ok', returnUrl: this.KJU_URL + '/message/' + req.body._id + '/response/' + responseId + '?token=' + req.body.consumerToken })
@@ -124,6 +124,20 @@ const KJU = function() {
 
         fetch(this.KJU_URL + '/message/' + data.msgId + '/response/' + data.respId + '?token=' + data.token, {
                 method: 'get',
+                headers: { 'Content-Type': 'application/json' },
+            })
+            .then(res => res.json())
+            .then(json => {
+                if (cb) cb(json);
+                if (this.logsEnabled) console.log('redeemed:', json)
+            });
+    }
+
+    this.permitCorrespondence = (data, cb) => {
+
+        fetch(this.KJU_URL + '/permitCorrespondence?token=' + data.token, {
+                method: 'post',
+                body: JSON.stringify(data),
                 headers: { 'Content-Type': 'application/json' },
             })
             .then(res => res.json())
